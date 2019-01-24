@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title> Flack </title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link href="{{ url_for('static',filename='styles/styles.css') }}" rel="stylesheet" type="text/css">
+    <script src="https://cdn.socket.io/socket.io-1.0.0.js"></script>
+    <script type = "text/javascript" src = "{{ url_for('static', filename='index.js')}}"> </script>
+  </head>
+
+<body>
+  <h1> Flack Chat </h1>
+  <h6 id="displayName"> Username </h6>
+  <div class = "container-fluid">
+    <div class = "row">
+      <div class = "col-2">
+        <form id="newchannel_form"> Add a new channel:
+          <input id="newchannel_name" type ='text'>
+          <input id="newchannel_submit" type="submit" value="Submit New Channel">
+        </form>
+        <div class = "panel panel-primary">
+          <div class = "panel-heading"> <h3 class = "panel-title"> Channels </h3>
+          </div>
+          <div class = "panel-body">
+            <ul class = "list-group" id=channel_list>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div id = "messagebox" class = "col-9">
+        <ul id="messages"> </ul>
+        <form id="newmessage_form">
+          <input id="newmessage" type = 'text'>
+          <input id="newmessage_submit" type="submit" value="Submit new message">
+        </form>
+    </div>
+  </div>
+</div>
+</body>

@@ -1,0 +1,35 @@
+h1 {
+    color: blue;
+}
+h6 {
+  color: red;
+}
+
+#messagebox {
+  position: relative;
+  left: 20px;
+  border: 1px solid red;
+  border-radius: 25px;
+  height: 500px ;
+  overflow-y: auto;
+}
+.panel-body {
+  max-height: 400px;
+  overflow: auto;
+}
+
+#newmessage_form {
+  position:fixed;
+  bottom: 1%;
+  visibility:hidden;
+}
+
+#messages {
+  list-style: none;
+  list-style-position: inside;
+  padding-left: 0;
+}
+
+#newmessage {
+  width: 700px;
+}
