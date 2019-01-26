@@ -22,7 +22,8 @@ document.addEventListener('DOMContentLoaded', function () {
     var data = JSON.parse(request.responseText);
     Object.keys(data).forEach(function(channel) {
       var new_li = document.createElement('li');
-      new_li.innerHTML = '<a href="javascript:void(0);" onClick=changeChannel("'+channel+'");>' + channel + '</a>';
+      new_li.innerHTML = '<pre><a href="javascript:void(0);">' + channel + '</a> </pre>';
+      new_li.setAttribute("onClick", "changeChannel('" + encodeURIComponent(channel) + "');");
       new_li.className = "list-group-item";
       new_li.id = channel;
       document.querySelector('#channel_list').append(new_li);
@@ -35,12 +36,13 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 function changeChannel(channel) {
+  channel = decodeURIComponent(channel)
   document.querySelector('#messages').innerHTML = '';
-  listelements= document.querySelectorAll('.list-group-item');
+  listelements=document.querySelectorAll('.list-group-item');
   listelements.forEach(function(listelement) {
     listelement.style.backgroundColor = "white";
   });
-  document.querySelector('#'+channel).style.backgroundColor = "lightblue";
+  document.getElementById(channel).style.backgroundColor = "lightblue";
   const request = new XMLHttpRequest();
   request.open("GET", "/channel_list");
   request.send();
@@ -48,7 +50,7 @@ function changeChannel(channel) {
     var data = JSON.parse(request.responseText);
     data[channel].forEach(function(message) {
       var new_li = document.createElement('li');
-      new_li.innerHTML = message["timestamp"]+' '+message["user"]+': '+message["message"];
+      new_li.innerHTML = "<pre>"+ message["timestamp"]+' '+message["user"]+': '+message["message"]+"</pre>";
       document.querySelector('#messages').append(new_li);
     });
     updateScroll();
@@ -97,7 +99,8 @@ document.addEventListener('DOMContentLoaded', function() {
 // update side bar of channels when a new channel is added
 socket.on('update channel list', newchannelname => {
   var new_li = document.createElement('li');
-  new_li.innerHTML = '<a href="javascript:void(0)"; onClick=changeChannel("'+ `${newchannelname.new_channel}` + '");>'+ `${newchannelname.new_channel}` + '</a>';
+  new_li.innerHTML = '<pre> <a href="javascript:void(0);">' + `${newchannelname.new_channel}` + '</a></pre>';
+  new_li.setAttribute("onClick", "changeChannel('" + encodeURIComponent(`${newchannelname.new_channel}`) + "');");
   new_li.className = "list-group-item";
   new_li.id = `${newchannelname.new_channel}`;
   document.querySelector('#channel_list').append(new_li);
@@ -128,7 +131,7 @@ document.addEventListener('DOMContentLoaded', function() {
 socket.on('update messages', newmessage => {
   if (`${newmessage.channel}` == localStorage.getItem('lastchannel')) {
         var new_li = document.createElement('li');
-        new_li.innerHTML = `${newmessage.new_message.timestamp} ${newmessage.new_message.user}: ${newmessage.new_message.message}`;
+        new_li.innerHTML = '<pre>' + `${newmessage.new_message.timestamp} ${newmessage.new_message.user}: ${newmessage.new_message.message}` + '</pre>';
         document.querySelector('#messages').append(new_li);
     }
   updateScroll();
