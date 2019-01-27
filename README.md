@@ -1,12 +1,8 @@
 # Project 2: CS50-SlackClone
 
-
-
 Flack
 
-This is a single page chat web app that was done for Harvard's CS50: Web Programming with Python and JavaScript
-
-course.  
+This is a single page chat web app that was done for Harvard's CS50: Web Programming with Python and JavaScript course.  
 
 The main objectives for this project were to learn to use Javascript to run code server-side, become more
 comfortable with building web user interfaces, and to gain experience with Socket.IO to communicate between clients and servers.
